@@ -37,7 +37,7 @@ class field {
 
         } else if (e === 'd'){
 
-            if(this.currentRow <= (this.height -=1)){
+            if(this.currentRow <= (this.height - 1)){
 
                 this.currentRow += 1
                 this.AddStar();
@@ -96,19 +96,42 @@ class field {
             result.push(arrayToPush)
         }
 
+        // Add Player
+
+        result[0][0] = '*'
+
         // Calculate Position of Hat
 
-        let HatIndex = Math.random() * highestArray
+        let HatWidth = Math.floor(Math.random() * width)
+        let HatHeight = Math.floor(Math.random() * height)
+
+        console.log(HatWidth)
+        console.log(HatHeight)
+
+        result[HatHeight][HatWidth] = '^';
 
         // Calculate Postion of Holes
 
+
+
         for(let i= 0; i < total_holes; i++){
-            let HoleIndex = Math.random() * total_holes
-            
+            let HoleWidth = Math.floor(Math.random() * width)
+            let HoleHeight = Math.floor(Math.random() * height)
+
+            if(result[HoleHeight][HoleWidth] === '^' || result[HoleHeight][HoleWidth] === 'O' ){
+                i--
+                continue;
+            } else if(HoleWidth ===  0 && HoleHeight === 0){
+                i--
+                continue;
+            }else {
+                result[HoleHeight][HoleWidth] = 'O'
+            }
+
 
         }
     
-
+            return result
 
 
     }
@@ -116,11 +139,7 @@ class field {
 }
 
 
-let newfield = new field([
-    ['*', '░', 'O'],
-    ['░', '░', '░'],
-    ['^', '░', 'O'],
-])
+let newfield = new field(field.generateField(10, 5, 0.2))
 
 console.log(newfield.print())
 
