@@ -138,6 +138,22 @@ class field {
     
 }
 
+// // Maze Solver
+
+// let field_to_add;
+// let fieldAchievable = false; 
+
+// while (fieldAchievable === false ){
+
+//     let field_to_test = field.generateField(10, 5, 0.2);
+    
+
+
+
+
+// }
+
+
 
 let newfield = new field(field.generateField(10, 5, 0.2))
 
